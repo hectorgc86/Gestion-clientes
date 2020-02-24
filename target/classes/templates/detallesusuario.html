@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layouts/layout :: main-fragment(  
+                                                ~{::title},
+                                                ~{:: #detallesusuario-header},
+                                                ~{:: #detallesusuario-nav},
+                                                ~{:: #detallesusuario-main-content},  
+                                                ~{:: #detallesusuario-footer}
+                                               )}">
+
+<head>
+<meta charset="UTF-8"/>
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Añadir usuario</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" th:href="@{/estilo.css}" href="../../static/estilo.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+</head>
+ 
+<body>
+ <div id="detallesusuario-header">
+        
+       Añadir usuario
+        
+    </div>
+    <div id="detallesusuario-nav" th:replace="~{/fragments/fragments :: nav-default}">
+        Añadir usuario Nav
+    </div>
+ 
+    <div id="detallesusuario-main-content">
+    <div class="container my-5">
+        <h3>Añadir Usuario</h3>
+        <div class="card">
+            <div class="card-body">
+                <div class="col-md-10">
+                    <form action="#" th:action="@{/usuarios/crear}" th:object="${usuario}"method="post">
+                        <div class="row">
+                            <div class="form-group col-md-8">
+                                <label for="user" class="col-form-label">User</label> 
+                                <input type="text" th:field="*{user}" class="form-control"
+                                            id="user" placeholder="User" />
+                                <div style="color: red" th:if="${#fields.hasErrors('user')}" th:errors="*{user}">User Error</div>
+                                            
+                            </div>
+                            <div class="form-group col-md-8">
+                                <label for="password" class="col-form-label">Password</label> 
+                                <input type="password" th:field="*{password}" class="form-control"
+                                            id="password" placeholder="Password" />
+                                <div style="color: red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</div>
+                                            
+                        
+                                
+                            </div>
+                    			 <div th:each="mail, rowStat :*{mails}"class="form-group col-md-8">
+                    			  <label for="password" class="col-form-label">Mail</label> 
+                    			 
+					 				<input type="text" th:field="*{mails[__${rowStat.index}__].mail}" class="form-control"
+                                            id="mail" placeholder="Mail" />
+                                            
+                                            <div style="color: red" th:if="${#fields.hasErrors('mails[__${rowStat.index}__].mail')}" th:errors="*{mails[__${rowStat.index}__].mail}">Mail Error</div>
+                                            
+                                            <input type="hidden" id="mailid" th:field="*{mails[__${rowStat.index}__].id}"/> 
+                                     </div>   
+                            
+                            <input type="hidden" id="id" th:field="*{id}"/>
+                             <input type="hidden" id="idcliente" th:field="*{cliente.id}"/>
+           
+                            <div class="col-md-6">
+                                <input type="submit" class="btn btn-primary" value=" Submit ">
+                            </div>     
+                        </div>
+                    </form>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+     <div id="detallesusuario-footer" th:replace="~{/fragments/fragments :: copyright}">
+        Footer de añadir cliente
+    </div>
+</body>
+
+</html>

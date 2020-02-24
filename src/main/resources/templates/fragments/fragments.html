@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Fragments</title>
+ <link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+</head>
+<body>
+     
+     
+    <ul th:fragment = "nav-default">
+        <li><a th:href="@{/}">Principal</a></li>
+         <li><a th:href="@{/usuarios/}">Usuarios</a></li>
+         <li><a th:href="@{/clientes/}">Clientes</a></li>
+          <li><a th:href="@{/productos/}">Productos</a></li>
+           <li><a th:href="@{/compras/}">Compras</a></li>
+    </ul>
+     
+    <div th:fragment="copyright">
+      &copy; hectorgranja2dam.org
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+ 
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layouts/layout :: main-fragment(  
+                                                ~{::title},
+                                                ~{:: #usuarios-header},
+                                                ~{:: #usuarios-nav},
+                                                ~{:: #usuarios-main-content},  
+                                                ~{:: #usuarios-footer}
+                                               )}">
+                                                
+<head>
+    <title>Usuarios</title>
+     <meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+    <th:block id="products-static-resources">  
+       <script type="text/javascript" src="../static/products.js" th:src="@{/products.js}"></script>
+    </th:block>
+     
+</head>
+<body>
+    <div id="usuarios-header">
+        Usuarios  
+    </div>
+    
+     <div id="usuarios-nav" th:replace="~{/fragments/fragments :: nav-default}">
+         Usuarios Nav
+    </div>
+     <div id="usuarios-main-content">
+				<h2>Usuarios</h2>
+				<p class="my-5">
+				</p>
+				<div th:switch="${usuarios}">
+					<h2 th:case="null">No hay usuarios creados!!</h2>
+					<div th:case="*">
+						<div class="*">
+							<table class="table table-striped table-responsive-md">
+								<thead>
+									<tr>
+										<th>User</th>
+										<th>Password</th>
+										<th>Mail</th>
+										<th>Editar</th>
+										<th>Borrar</th>
+										<th>Ver compras</th>
+									</tr>
+								</thead>
+								<tbody>
+								<div th:each="usuario : ${usuarios}">
+									<tr >
+										<td th:text="${usuario.user}"></td>
+										<td th:text="${usuario.password}"></td>
+										<td></td>
+										<td><a
+											th:href="@{/usuarios/editar/{id}(id=${usuario.id})}"
+											class="btn btn-primary"> <i class="fas fa-user-edit ml-2"></i>
+										</a></td>
+										<td><a
+											th:href="@{/usuarios/borrar/{id}(id=${usuario.id})}"
+											class="btn btn-primary"> <i
+												class="fas fa-user-times ml-2"></i>
+										</a></td>
+										<td><a
+											th:href="@{/usuarios/vercompras/{id}(id=${usuario.cliente.id})}"
+											class="btn btn-primary"><i class="fas fa-shopping-basket"></i>
+										</a></td>
+									</tr>
+									<div>
+										<tr th:each="mail : ${usuario.mails}" >
+											<td></td>
+					 						<td ></td>
+											<td th:text="${mail.mail}"></td>
+									</tr>
+									</div>
+									</div>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div th:switch="${compras}" class="col-md-*">
+					<div class="col-md-10">
+						<h2 th:case="null"></h2>
+						<div th:case="*">
+						<h2>Compras</h2>
+							<table class="table table-striped table-responsive-md">
+								<thead>
+									<tr>
+										<th>Cliente</th>
+										<th>Producto</th>
+										<th>Fecha</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="compra : ${compras}">
+										<td th:text="${compra.cliente.nombre}"></td>
+										<td th:text="${compra.producto.descripcion}"></td>
+										<td th:text="${compra.id.fecha}"></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+							</div>
+				
+    <div id="usuarios-footer" th:replace="~{/fragments/fragments :: copyright}">
+        Footer de usuarios
+    </div>
+
+</body>
+</html>

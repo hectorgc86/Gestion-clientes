@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layouts/layout :: main-fragment(  
+                                                ~{::title},
+                                                ~{:: #detallesproducto-header},
+                                                ~{:: #detallesproducto-nav},
+                                                ~{:: #detallesproducto-main-content},  
+                                                ~{:: #detallesproducto-footer}
+                                               )}">
+
+<head>
+<meta charset="UTF-8"/>
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Añadir Producto</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" th:href="@{/estilo.css}" href="../../static/estilo.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+    </th:block>
+</head>
+ 
+<body>
+ <div id="detallesproducto-header">
+        
+       Añadir producto
+        
+    </div>
+     <div id="detallesproducto-nav" th:replace="~{/fragments/fragments :: nav-default}">
+        Anñadir clientes Nav
+    </div>
+ 
+    <div id="detallesproducto-main-content">
+    <div class="container my-5">
+        <h3>Añadir Producto</h3>
+        <div class="card">
+            <div class="card-body">
+                <div class="col-md-10">
+                    <form action="#" th:action="@{/productos/crear}" th:object="${producto}"method="post">
+                        <div class="row">
+                            <div class="form-group col-md-8">
+                                <label for="descripcion" class="col-form-label">Descripción</label> 
+                                <input type="text" th:field="*{descripcion}" class="form-control"
+                                            id="descripcion" placeholder="Descripción" />
+                            <div style="color: red" th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}">Descripción Error</div>
+                                            
+                            </div>
+                            <div class="form-group col-md-8">
+                                <label for="precio" class="col-form-label">Precio</label> 
+                                <input type="text" th:field="*{precio}" class="form-control"
+                                            id="precio" placeholder="Precio" />
+                            </div>
+                            <div class="form-group col-md-8">
+                                <label for="disponibilidad" class="col-form-label">Disponibilidad</label> 
+                                <input type="text" th:field="*{disponibilidad}" class="form-control"
+                                            id="disponibilidad" placeholder="Disponibilidad" />
+                            </div>
+ 
+                            <div class="col-md-6">
+                                <input type="submit" class="btn btn-primary" value=" Submit ">
+                            </div>
+ 
+                            <input type="hidden" id="productoId" th:field="*{productoId}">
+     
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+     <div id="detallesproducto-footer" th:replace="~{/fragments/fragments :: copyright}">
+        Footer de añadir productos
+    </div>
+</body>
+
+</html>

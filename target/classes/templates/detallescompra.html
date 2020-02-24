@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+ 
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layouts/layout :: main-fragment(  
+                                                ~{::title},
+                                                ~{:: #detallescompra-header},
+                                                ~{:: #detallescompra-nav},
+                                                ~{:: #detallescompra-main-content},  
+                                                ~{:: #detallescompra-footer}
+                                               )}">
+                                                
+<head>
+    <title>Añadir compra</title>
+     <meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" th:href="@{/estilo.css}" href="../../static/estilo.css"/>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+
+</head>
+<body>
+ 
+    <div id="detallescompra-header">
+        
+        Añadir compra
+        
+    </div>
+     <div id="detallescompra-nav" th:replace="~{/fragments/fragments :: nav-default}">
+        Añadir compras Nav
+    </div>
+ 
+    <div id="detallescompra-main-content">
+   <div class="container my-5">
+        <h3>Comprar</h3>
+        <div class="card">
+            <div class="card-body">
+                <div class="col-md-10">
+                  <form action="#" th:action="@{/compras/crear}" th:object="${productosClientesId}" method="post">
+                        <div class="row">
+                            <div class="form-group col-md-8">
+                                <label for="cliente" class="col-form-label">Cliente</label> 
+                               <select th:field="*{clienteId}">
+    								<option th:each="cliente : ${clientes}" th:value="${cliente.id}" th:text="${cliente.Nombre + cliente.Apellido}"></option>
+								</select>
+                            </div>
+                            
+                             <div class="form-group col-md-8">
+                                <label for="producto" class="col-form-label">Producto</label> 
+                               <select th:field="*{productoId}">
+    								<option th:each="producto : ${productos}" th:value="${producto.productoId}" th:text="${producto.Descripcion}"></option>
+								</select>
+                            </div>
+ 
+                            <div class="col-md-6">
+                                <input type="submit" class="btn btn-primary" value=" Comprar ">
+                            </div>
+ 
+               
+     
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+     </div>
+    <div id="detallescompra-footer" th:replace="~{/fragments/fragments :: copyright}">
+        Footer de añadir compra
+    </div>
+     
+     
+</body>
+</html>

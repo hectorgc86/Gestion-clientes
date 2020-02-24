@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+ 
+<!--  main-fragment (title, otherStaticResources, header, nav, mainContent, footer)  -->
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layouts/layout :: main-fragment(  
+                                                ~{::title},
+                                                ~{:: #compras-header},
+                                                ~{:: #compras-nav},
+                                                ~{:: #compras-main-content},  
+                                                ~{:: #compras-footer}
+                                               )}">
+                                                
+<head>
+    <title>Compras</title>
+     <meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+</head>
+<body>
+ 
+    <div id="compras-header">
+        
+        Compras
+        
+    </div>
+    <div id="compras-nav" th:replace="~{/fragments/fragments :: nav-default}">
+        Compras Nav
+    </div>
+ 
+    <div id="compras-main-content">
+ 
+				<h2>Compras</h2>
+				<div th:switch="${compras}" class="container my-5">
+					<p class="my-5">
+						<a th:href="@{comprar/{id}(id=null)}"
+							class="btn btn-primary"> <i class="fas fa-user-plus ml-2">
+								Comprar </i></a>
+					</p>
+					<div class="col-md-10">
+						<h2 th:case="null">No hay filas !!</h2>
+						<div th:case="*">
+							<table class="table table-striped table-responsive-md">
+								<thead>
+									<tr>
+										<th>Cliente</th>
+										<th>Producto</th>
+										<th>Fecha</th>
+										<th>Editar</th>
+										<th>Borrar</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="compra : ${compras}">
+										<td th:text="${compra.cliente.nombre}"></td>
+										<td th:text="${compra.producto.descripcion}"></td>
+										<td th:text="${compra.id.fecha}"></td>
+										<td><a
+											th:href="@{editar/{clienteId}/{productoId}/{fecha}(clienteId=${compra.id.clienteId},productoId=${compra.id.productoId},fecha=${compra.id.fecha})}"
+											class="btn btn-primary"> <i class="fas fa-user-edit ml-2"></i>
+										</a></td>
+										<td><a
+											th:href="@{borrar/{clienteId}/{productoId}/{fecha}(clienteId=${compra.id.clienteId},productoId=${compra.id.productoId},fecha=${compra.id.fecha})}"
+											class="btn btn-primary"> <i
+												class="fas fa-user-times ml-2"></i>
+										</a></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+    <div id="compras-footer" th:replace="~{/fragments/fragments :: copyright}">
+        Footer de compras
+    </div>
+     
+     
+</body>
+</html>
